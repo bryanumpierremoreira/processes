@@ -68,22 +68,34 @@ int get_subset(int me, int *valor_collatz)
 
 int main()
 {
-    pid_t newPid, me, parent, x;
+    pid_t newPid, me, parent, x, pai;
     int status;
     int n = 0;
     int valor_collatz = 0;
     int val_collatz_teste = 1;
     char texto[256];
-
     
-
+    pai = getpid();
+    printf("Pid Pai: %d\n", pai);
     printf("Digite o range de processos filhos: ");
     scanf("%d", &n);
     for (int i = 0; i < n; i++)
     {
-        printf("loop: %d\n", i);
-        newPid = fork();
+        me = getpid();
+        printf("\nPid corrente no for: %d", me);
+        printf("\nloop: %d\n", i);
+        if (pai == me)
+        {
+            newPid = fork();
+            printf("\nCriou um filho\n");
+        } else {
+            continue;
+        }
+        
+    
     }
+    
+
     
 
     me = getpid();
